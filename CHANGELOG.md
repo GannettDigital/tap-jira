@@ -1,5 +1,8 @@
 # Changelog
 
+##2.1.0
+ * Add support for JIRA Tempo Schema and streams and capture fields schema as objects
+
 ## 2.0.0
   * Change primary key of `users` stream to from `key` to `accountId` [#46](https://github.com/singer-io/tap-jira/pull/46)
 

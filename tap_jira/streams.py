@@ -2,10 +2,12 @@ import json
 import pytz
 import requests
 import singer
+import datetime
 
 from singer import metrics, utils, metadata, Transformer
 from .http import Paginator
 from .context import Context
+from datetime import date
 
 
 def raise_if_bookmark_cannot_advance(worklogs):
@@ -144,7 +146,6 @@ class ProjectTypes(Stream):
             type_.pop("icon")
         self.write_page(types)
 
-
 class Users(Stream):
     def sync(self):
         max_results = 2
@@ -186,9 +187,9 @@ class Issues(Stream):
         start_date = last_updated.astimezone(pytz.timezone(timezone)).strftime("%Y-%m-%d %H:%M")
 
         jql = "updated >= '{}' order by updated asc".format(start_date)
-        params = {"fields": "*all",
-                  "expand": "changelog,transitions",
+        params = {"fields": "issuelinks,assignee,issuetype,labels,components,project,summary,created,updated",
                   "validateQuery": "strict",
+                  "expand": "names",
                   "jql": jql}
         page_num = Context.bookmark(page_num_offset) or 0
         pager = Paginator(Context.client, items_key="issues", page_num=page_num)
@@ -196,9 +197,13 @@ class Issues(Stream):
                                 "GET", "/rest/api/2/search",
                                 params=params):
             # sync comments and changelogs for each issue
-            sync_sub_streams(page)
+            # sync_sub_streams(page)
             for issue in page:
                 issue['fields'].pop('worklog', None)
+                issue['fields'].pop('attachment', None)
+                issue['fields']['project'].pop('avatarUrls', None)
+                issue['fields']['project'].pop('projectCategory', None)
+                issue['fields'].pop('description', None)
                 # The JSON schema for the search endpoint indicates an "operations"
                 # field can be present. This field is self-referential, making it
                 # difficult to deal with - we would have to flatten the operations
@@ -265,6 +270,41 @@ class Worklogs(Stream):
             if last_page:
                 break
 
+class TempoTimesheets(Stream):
+    def _fetch_ids(self, last_updated, run_date):
+        body = {
+                "from": last_updated.strftime('%Y-%m-%d'),
+                "to": run_date.strftime('%Y-%m-%d')
+            }
+        return Context.client.request(
+            self.tap_stream_id, "POST", "/rest/tempo-timesheets/4/worklogs/search",
+            headers={"Content-Type": "application/json"},
+            data=json.dumps(body)
+        )
+
+    def sync(self):
+        updated_bookmark = [self.tap_stream_id, "updated"]
+        last_updated = Context.update_start_date_bookmark(updated_bookmark)
+        run_date = date.today()
+        last_updated = last_updated.date()
+
+        while last_updated < run_date:
+            timesheets = self._fetch_ids(last_updated, run_date)
+            # Grab last_updated before transform in write_page
+            new_last_updated = run_date
+            for t in timesheets:
+                t['issue'].pop('versions', None)
+                t['issue'].pop('components', None)
+                t['issue'].pop('customFields', None)
+                t.pop('comment', None)
+                t.pop('timespent', None)
+                t.pop('location', None)
+            self.write_page(timesheets)
+
+            last_updated = new_last_updated
+            Context.set_bookmark(updated_bookmark, last_updated.strftime('%Y-%m-%d'))
+            singer.write_state(Context.state)
+
 
 VERSIONS = Stream("versions", ["id"], indirect_stream=True)
 ISSUES = Issues("issues", ["id"])
@@ -287,6 +327,8 @@ ALL_STREAMS = [
     CHANGELOGS,
     ISSUE_TRANSITIONS,
     Worklogs("worklogs", ["id"]),
+    TempoTimesheets("timesheets", ["id"])
+
 ]
 
 ALL_STREAM_IDS = [s.tap_stream_id for s in ALL_STREAMS]

@@ -1,0 +1,361 @@
+
+{
+	"title": "Timesheet",
+	"type": [
+	   "null",
+ 	   "object"
+	],
+    "properties": {
+		"timeSpent": {
+			"type": [
+				"null",
+				"string"
+			]
+	    },
+		"issue": {
+			"title": "Issue",
+			"type": [
+				"null",
+				"object"
+			],
+			"properties": {
+				"projectId": {
+				  "type": [
+				    "null",
+				    "integer"
+				  ]
+				},
+				"projectKey": {
+				  "type": [
+				    "null",
+				    "string"
+				  ]
+				},
+				"issueType": {
+				  "type": [
+				  	"null",
+				    "string"
+				  ]
+				},
+				"iconUrl": {
+				  "type": [
+				  	"null",
+				    "string"
+				  ]
+				},
+				"versions": {
+				  "type": [
+				  	"null",
+				    "array"
+				  ],
+				  "items": {
+				    "type": [
+					  "null",
+				      "integer"
+						]
+					}
+				},
+				"summary": {
+				  "type": [
+				  	"null",
+				    "string"
+				  ]
+				},
+				"components": {
+				  "type": [
+				  	"null",
+				    "array"
+				  ],
+				  "items": {
+						"type": [
+						  "null",
+						  "integer"
+						]
+					}
+				},
+				"internalIssue": {
+				  "type": [
+				  	"null",
+				    "boolean"
+				  ]
+				},
+				"issueStatus": {
+				  "type": [
+				  	"null",
+				    "string"
+				  ]
+				},
+				"reporterKey": {
+				  "type": [
+				  	"null",
+				    "string"
+				  ]
+				},
+				"accountKey": {
+				  "type": [
+				  	"null",
+				    "string"
+				  ]
+				},
+				"key": {
+				  "type": [
+				  	"null",
+				    "string"
+				  ]
+				},
+				"id": {
+				  "type": [
+				  	"null",
+				    "integer"
+				  ]
+				},
+				"customFields": {
+				  "type": [
+				  	"null",
+				    "array"
+				  ],
+          		  "items": {
+          		    "type": [
+					  "null",
+				      "integer"
+					]
+          		  }
+				},
+				"estimatedRemainingSeconds": {
+				  "type": [
+				    "null",
+				    "integer"
+				  ]
+				},
+				"parentKey": {
+				  "type": [
+				  	"null",
+				    "string"
+				  ]
+				},
+				"parentIssue" : {
+					"title": "ParentIssue",
+					"type": [
+						"null",
+						"object"
+					],
+					"properties": {
+						"remainingEstimate": {
+							"type": [
+								"null",
+								"integer"
+							]
+						},
+						"originEstimate": {
+							"type": [
+								"null",
+								"integer"
+							]
+						},
+						"summary": {
+							"type": [
+								"null",
+								"string"
+							]
+						},
+						"iconUrl": {
+							"type": [
+								"null",
+								"string"
+							]
+						}
+					}					
+				},
+				"epicKey": {
+				  "type": [
+				  	"null",
+				    "string"
+				  ]
+				},
+				"epicIssue" : {
+					"title": "EpicIssue",
+					"type": [
+						"null",
+						"object"
+					],
+					"properties": {
+						"remainingEstimate": {
+							"type": [
+								"null",
+								"integer"
+							]
+						},
+						"originEstimate": {
+							"type": [
+								"null",
+								"integer"
+							]
+						},
+						"summary": {
+							"type": [
+								"null",
+								"string"
+							]
+						},
+						"iconUrl": {
+							"type": [
+								"null",
+								"string"
+							]
+						}
+					}					
+				},		
+				"epicName": {
+				  "type": [
+				  	"null",
+				    "string"
+				  ]
+				},
+				"originalEstimateSeconds": {
+				  "type": [
+				  	"null",
+				    "integer"
+				  ]
+				}
+			}
+	    },
+		"timeSpentSeconds": {
+		  "type": [
+		    "null",
+		    "integer"
+		  ]
+		},
+		"comment": {
+		  "type": [
+		    "null",
+		    "string"
+		  ]
+		},
+		"tempoWorklogId": {
+			"type": [
+	        "null",
+	        "integer"
+	      ]
+	    },
+		"billableSeconds": {
+	      "type": [
+	        "null",
+	        "integer"
+	      ]
+	    },
+		"location": {
+	      "title": "Location",
+	      "type": [
+	        "null",
+	        "object"
+	      ],
+	      "properties": {
+	        "name": {
+	          "type": [
+	            "null",
+	            "string"
+	          ]
+	        },
+	        "id": {
+	          "type": [
+	            "null",
+	            "integer"
+	          ]
+	        }
+	      }
+	    },
+		"attributes": {
+	      "title": "Attributes",
+	      "type": [
+	        "null",
+	        "object"
+	      ],
+	      "properties": {
+			"_TypeofWork_": {
+		      "title": "_TypeofWork_",
+		      "type": [
+		        "null",
+		        "object"
+		      ],
+		      "properties": {
+		        "name": {
+		          "type": [
+		            "null",
+		            "string"
+		          ]
+		        },
+		        "workAttributeId": {
+		          "type": [
+		            "null",
+		            "integer"
+		          ]
+		        },
+		        "value": {
+		          "type": [
+		          	"null",
+		            "string"
+		          ]
+		        },
+		        "type": {
+		          "type": [
+		          	"null",
+		            "string"
+		          ]
+		        },
+		        "key": {
+		          "type": [
+		          	"null",
+		            "string"
+		          ]
+		        }
+		      }
+		    }
+		  }
+	    },
+	    "started": {
+	      "type": [
+	        "null",
+	        "string"
+	      ],
+	      "format": "date-time"
+	    },
+	    "dateCreated": {
+	      "type": [
+	        "null",
+	        "string"
+	      ],
+	      "format": "date-time"
+	    },
+	    "dateUpdated": {
+	      "type": [
+	        "null",
+	        "string"
+	      ],
+	      "format": "date-time"
+	    },
+		"originTaskId": {
+			"type": [
+	        "null",
+	        "integer"
+	      ]
+	    },
+	    "worker": {
+	      "type": [
+	        "null",
+	        "string"
+	      ]
+	    },
+	    "updater": {
+	      "type": [
+	        "null",
+	        "string"
+	      ]
+	    },
+	 	"originId": {
+			"type": [
+	        "null",
+	        "integer"
+	      ]
+	    }
+	}
+}
