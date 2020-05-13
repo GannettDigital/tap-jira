@@ -187,7 +187,7 @@ class Issues(Stream):
         start_date = last_updated.astimezone(pytz.timezone(timezone)).strftime("%Y-%m-%d %H:%M")
 
         jql = "updated >= '{}' order by updated asc".format(start_date)
-        params = {"fields": "issuelinks,assignee,issuetype,labels,components,project,summary,created,updated",
+        params = {"fields": "issuelinks,assignee,issuetype,labels,components,project,summary,created,updated, status",
                   "validateQuery": "strict",
                   "expand": "names",
                   "jql": jql}
