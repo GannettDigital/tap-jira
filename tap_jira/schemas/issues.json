@@ -36,6 +36,85 @@
         "object"
       ],
       "properties": {
+        "status": {
+          "type": [
+            "null",
+            "object"
+          ],
+          "properties": {
+            "self": {
+              "type": [
+                "null",
+                "string"
+              ],
+              "format": "uri"
+            },
+            "description": {
+              "type": [
+                "null",
+                "string"
+              ]
+            },
+            "iconUrl": {
+              "type": [
+                "null",
+                "string"
+              ],
+              "format": "uri"
+            },
+            "name": {
+              "type": [
+                "null",
+                "string"
+              ]
+            },
+            "id": {
+              "type": [
+                "null",
+                "string"
+              ]
+            },
+            "statusCategory": {
+              "type": [
+                "null",
+                "object"
+              ],
+              "properties": {
+                "self": {
+                  "type": [
+                    "null",
+                    "string"
+                  ],
+                  "format": "uri"    
+                },
+                "id": {
+                  "type": [
+                    "null",
+                    "integer"
+                  ]    
+                },
+                "key": {
+                  "type": [
+                    "null",
+                    "string"
+                  ]   
+                }, 
+                "colorName": {
+                  "type": [
+                    "null",
+                    "string"
+                  ]   
+                },
+                "name": {
+                  "type": [
+                    "null",
+                    "string"
+                  ]   
+                }       
+              }
+            }
+          }
+        },
         "updated": {
           "type": [
             "null",

@@ -1,5 +1,8 @@
 # Changelog
 
+##2.1.1
+ * Add add status fields for issues
+
 ##2.1.0
  * Add support for JIRA Tempo Schema and streams and capture fields schema as objects
 
